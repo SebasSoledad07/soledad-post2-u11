@@ -10,7 +10,12 @@ public class ApiError {
 
     public ApiError() {}
 
-    public ApiError(int i, String notFound, String message, String requestURI) {
+    public ApiError(int status, String error, String mensaje, String path) {
+        this.status = status;
+        this.error = error;
+        this.mensaje = mensaje;
+        this.path = path;
+        this.timestamp = java.time.Instant.now().toString();
     }
 
     public int getStatus() { return status; }
