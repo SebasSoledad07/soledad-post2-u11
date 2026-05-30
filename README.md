@@ -63,14 +63,14 @@ Finished at: 2026-05-29T23:49:51-04:00
 
 ## 2) Respuestas de la API (capturas arriba):
 ### GET /api/productos → 200 OK + lista de productos
-  ![Verificación / Login](docs/screenshots/lista-vacia-productos.png)
+  ![Verificación / Login](docs/screenshots/post1/lista-vacia-productos.png)
 ### POST /api/productos (con JSON válido) → 201 Created + producto creado
-  ![Verificación / Login](docs/screenshots/producto-creado-201.png)
+  ![Verificación / Login](docs/screenshots/post1/producto-creado-201.png)
 3) Manejo de errores:
 ### GET /api/productos/999 → 404 Not Found + mensaje "Producto no encontrado"
-  ![Verificación / Login](docs/screenshots/producto-no-encontrado.png)
+  ![Verificación / Login](docs/screenshots/post1/producto-no-encontrado.png)
 ### POST /api/productos (con JSON inválido) → 400 Bad Request + mensaje "JSON parse error"
-  ![Verificación / Login](docs/screenshots/validacion-error-404.png)
+  ![Verificación / Login](docs/screenshots/post1/validacion-error-404.png)
 
 Notas y recomendaciones
 ----------------------
