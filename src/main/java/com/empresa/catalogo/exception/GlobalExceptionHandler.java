@@ -11,10 +11,13 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler(RecursoNoEncontradoException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiError handleNotFound(RecursoNoEncontradoException ex,
                                    HttpServletRequest req) {
+        log.warn("Resource not found: {}", ex.getMessage());
         return new ApiError(404, "Not Found", ex.getMessage(),
                 req.getRequestURI());
     }
@@ -25,6 +28,7 @@ public class GlobalExceptionHandler {
         String errores = ex.getBindingResult().getFieldErrors().stream()
                 .map(fe -> fe.getField() + ": " + fe.getDefaultMessage())
                 .collect(Collectors.joining("; "));
+        log.info("Validation failure: {}", errores);
         return new ApiError(400, "Bad Request", errores,
                 req.getRequestURI());
     }
@@ -32,6 +36,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleGeneral(Exception ex, HttpServletRequest req)
     {
+        log.error("Unhandled exception while processing request {}", req.getRequestURI(), ex);
         return new ApiError(500, "Internal Server Error", "Error inesperado. Contactar soporte.",
                 req.getRequestURI());
     }
